@@ -34,24 +34,24 @@ namespace WPF_TEST.ViewModels
         [RelayCommand]
         private void OnClick()
         {
-            if (Name == "으잉?")
+            if (Name == "Clicked")
             {
-                Name = "와우";
+                Name = "just Click";
             }
             else
             {
-                Name = "으잉?";
+                Name = "Clicked";
             }
         }
 
         public MainViewModel()
         {
-            name = "와우";            
+            name = "초기화";            
         }
 
         partial void OnNameChanged(string value)
         {
-            Result = "완료";
+            Result = "변경 완료";
         }
 
         #endregion
