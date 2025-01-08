@@ -18,7 +18,7 @@ namespace WPF_TEST
     {
         public App()
         {
-            Services = ConfigureServices();
+            Services = ConfigureServices;
             this.InitializeComponent();
         }
 
@@ -26,17 +26,20 @@ namespace WPF_TEST
 
         public IServiceProvider Services { get; }
 
-        private static IServiceProvider ConfigureServices()
+        private static IServiceProvider ConfigureServices
         {
-            var services = new ServiceCollection();
+            get
+            {
+                var services = new ServiceCollection();
 
-            // Services //
-            // services.AddSingleton<IContactsService, ContactsService>();
+                // Services //
+                // services.AddSingleton<IContactsService, ContactsService>();
 
-            // ViewModels //
-            services.AddTransient(typeof(MainViewModel));
+                // ViewModels //
+                services.AddTransient<MainViewModel>();
 
-            return services.BuildServiceProvider();
+                return services.BuildServiceProvider();
+            }
         }
     }
 }

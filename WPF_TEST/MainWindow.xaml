@@ -16,7 +16,7 @@
         <vm:MainViewModel/>
     </Window.DataContext>-->
     <Grid>
-        <StackPanel>
+        <WrapPanel>
             <TextBlock
                 Margin="10"
                 HorizontalAlignment="Center"
@@ -31,6 +31,6 @@
                 Margin="10"
                 HorizontalAlignment="Center"
                 Text="{Binding Result}" />
-        </StackPanel>
+        </WrapPanel>
     </Grid>
 </Window>
