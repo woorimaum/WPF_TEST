@@ -2,12 +2,14 @@
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using WPF_TEST.Models;
 
 namespace WPF_TEST.ViewModels
 {
@@ -20,6 +22,18 @@ namespace WPF_TEST.ViewModels
 
         [ObservableProperty]
         private string? result;
+
+        [ObservableProperty]
+        private string userPW;
+
+        [ObservableProperty]
+        private ObservableCollection<MyDataGrid> dataGridCollection;
+
+        [ObservableProperty]
+        private MyDataGrid selectedDataGridCollection;
+
+        [ObservableProperty]
+        private int selectedDataGridIndex;
 
         #endregion
 
@@ -44,9 +58,44 @@ namespace WPF_TEST.ViewModels
             }
         }
 
+        [RelayCommand]
+        private void OnUp()
+        {
+            if (DataGridCollection.First() != SelectedDataGridCollection)
+            {
+                SelectedDataGridCollection = DataGridCollection[DataGridCollection.IndexOf(SelectedDataGridCollection) - 1];
+            }   
+        }
+
+        [RelayCommand]
+        private void OnDown()
+        {
+            if (DataGridCollection.Last() != SelectedDataGridCollection)
+            {
+                SelectedDataGridCollection = DataGridCollection[DataGridCollection.IndexOf(SelectedDataGridCollection) + 1];
+            }
+            
+        }
+
         public MainViewModel()
         {
             name = "초기화";            
+
+            DataGridCollection =
+            [
+                new MyDataGrid() { Index = 0, Name = "aaaa", Description = "just" },
+                new MyDataGrid() { Index = 1, Name = "bbbb", Description = "test" },
+                new MyDataGrid() { Index = 2, Name = "cccc", Description = "this" },
+                new MyDataGrid() { Index = 3, Name = "dddd", Description = "it" },
+
+                //new MyDataGrid() { Index = 0 },
+                //new MyDataGrid() { Index = 1 },
+                //new MyDataGrid() { Index = 2 },
+                //new MyDataGrid() { Index = 3 },
+            ];
+
+            SelectedDataGridCollection = DataGridCollection.First();
+            SelectedDataGridIndex = 0;
         }
 
         partial void OnNameChanged(string value)
