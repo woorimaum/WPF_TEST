@@ -35,8 +35,6 @@ namespace WPF_TEST
                 // Services //
                 // services.AddSingleton<IContactsService, ContactsService>();
 
-                
-
                 // ViewModels //
                 services.AddTransient<MainViewModel>();
 

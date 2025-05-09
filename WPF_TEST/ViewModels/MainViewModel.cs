@@ -59,6 +59,18 @@ namespace WPF_TEST.ViewModels
         }
 
         [RelayCommand]
+        private void Maximize()
+        {
+            //SystemCommands.MaximizeWindow((Window)this);
+        }
+
+        [RelayCommand]
+        private void Restore() 
+        {
+            //SystemCommands.RestoreWindow((Window)this);
+        }
+
+        [RelayCommand]
         private void OnUp()
         {
             if (DataGridCollection.First() != SelectedDataGridCollection)
