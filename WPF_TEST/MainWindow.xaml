@@ -2,20 +2,23 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:extends="clr-namespace:WPF_TEST.Extends"        
+        xmlns:extends="clr-namespace:WPF_TEST.Extends"
         xmlns:local="clr-namespace:WPF_TEST"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"        
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         AllowsTransparency="True"
         Title="MainWindow"
+        Foreground="White"
+        FontFamily="Segoe UI"
         Width="800"
         WindowStartupLocation="CenterScreen"
+        SnapsToDevicePixels="True"
         Background="Transparent"
-        WindowState="Normal"        
-        WindowStyle="None"   
-        x:Name="window"        
-        Height="450"        
+        WindowState="Normal"
+        WindowStyle="None"
+        x:Name="window"
+        Height="450"
         mc:Ignorable="d">
 
     <WindowChrome.WindowChrome>
@@ -24,7 +27,7 @@
                       CornerRadius="8" />
     </WindowChrome.WindowChrome>
 
-    <Window.CommandBindings>        
+    <Window.CommandBindings>
         <CommandBinding CanExecute="CommandBinding_CanExecute"
                         Command="{x:Static SystemCommands.MaximizeWindowCommand}"
                         Executed="CommandBinding_Executed_Maximize" />
@@ -44,7 +47,8 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Border CornerRadius="8,8,0,0" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+            <Border CornerRadius="8,8,0,0"
+                    MouseLeftButtonDown="Border_MouseLeftButtonDown">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0"
                                          EndPoint="1,1"
@@ -57,7 +61,8 @@
 
                 </Border.Background>
 
-                <StackPanel HorizontalAlignment="Right" Margin="0,0,10,0"
+                <StackPanel HorizontalAlignment="Right"
+                            Margin="0,0,10,0"
                             VerticalAlignment="Center"
                             Orientation="Horizontal">
                     <Button Command="{x:Static SystemCommands.MinimizeWindowCommand}"
@@ -81,11 +86,11 @@
                             WindowChrome.IsHitTestVisibleInChrome="true" />
                     <Button Width="30"
                             Height="30"
-                            ToolTip="Close">                        
-                        <i:Interaction.Triggers>                            
+                            ToolTip="Close">
+                        <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">
                                 <i:CallMethodAction TargetObject="{Binding ElementName=window}"
-                                                     MethodName="Close" />
+                                                    MethodName="Close" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </Button>
@@ -93,9 +98,16 @@
 
             </Border>
 
-            <Border CornerRadius="0,0,8,8" Background="White" Grid.Row="1">
+            <Border CornerRadius="0,0,8,8"
+                    Background="#FF212121"
+                    Grid.Row="1">
 
                 <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
                     <WrapPanel>
                         <TextBlock Margin="10"
                                    HorizontalAlignment="Center"
@@ -103,37 +115,56 @@
                         <Button Width="100"
                                 Height="50"
                                 Margin="10"
-                                Command="{Binding ClickCommand}"
+                                Command="{Binding ClickCommand}"                                
                                 Content="Click" />
 
+                        <Button Content="&#xe921;"
+                                Height="40"
+                                Width="40"
+                                FontSize="20"                                
+                                FontFamily="Segoe Fluent Icons"
+                                Margin="0,0,10,0" />
+
+                        <Button Content="&#xe923;"
+                                Height="40"
+                                Width="40"
+                                FontSize="20"
+                                FontFamily="Segoe Fluent Icons"
+                                Margin="0,0,10,0" />
+
+                        <Button Content="&#xe922;"
+                                Height="40"
+                                Width="40"
+                                FontSize="20"
+                                FontFamily="Segoe Fluent Icons"
+                                Margin="0,0,10,0" />
+
+                        <Button Content="&#xe8bb;"
+                                Height="40"
+                                Width="40"
+                                FontSize="20"
+                                FontFamily="Segoe Fluent Icons"
+                                Margin="0,0,10,0" />
                         <PasswordBox Width="100"
                                      Height="30"
                                      extends:PasswordExtend.BindablePassword="{Binding UserPW, Mode=TwoWay}"
                                      extends:PasswordExtend.IsPasswordBindable="True" />
-
-                        <Grid>
-
-                            <!--<ui:FontIcon FontFamily="Segoe Fluent Icons"
-                                     Glyph="&#xE8A7;"
-                                     Foreground="#C72335" />-->
-                            <!--<FontIcon FontFamily="Segoe Fluent Icons"
-                                  Glyph="&#xEB52;"
-                                  Foreground="#C72335" />
-                        <FontIcon FontFamily="Segoe Fluent Icons"
-                                  Glyph="&#xEB51;" />-->
-                        </Grid>
                     </WrapPanel>
 
-                    <Border HorizontalAlignment="Stretch"
-                            VerticalAlignment="Bottom"
-                            Grid.Row="1"
-                            Background="Red"
-                            CornerRadius="0,0,8,8"
-                            Height="54" />
+                    <Border Grid.Row="1"
+                            CornerRadius="8"
+                            Background="#FF37474F"
+                            Margin="5,0,5,5">
 
+                        <Border HorizontalAlignment="Stretch"
+                                VerticalAlignment="Bottom"
+                                Grid.Row="1"
+                                Background="#DD2C00"
+                                CornerRadius="0,0,8,8"
+                                Height="54" />
+                    </Border>
                 </Grid>
-                
-                
+
             </Border>
 
         </Grid>
