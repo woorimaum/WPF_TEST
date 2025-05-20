@@ -7,9 +7,8 @@
     <Application.Resources>        
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles/DataGrid.xaml" />
-                <ResourceDictionary Source="Styles/ColorSet.xaml" />                
-                <ResourceDictionary Source="/Styles/Button.xaml" />
+                <ResourceDictionary Source="/Themes/ThemeGeneric.xaml" />
+                <ResourceDictionary Source="/Styles/StyleGeneric.xaml" />                
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

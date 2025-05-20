@@ -21,6 +21,7 @@ using System.Windows.Interop;
 using WPF_TEST.Helpers;
 using static WPF_TEST.NativeMethods;
 using System.Diagnostics;
+using System.Windows.Media.Effects;
 
 namespace WPF_TEST
 {
@@ -29,11 +30,8 @@ namespace WPF_TEST
     /// </summary>
     public partial class MainWindow : Window
     {
-        string _filename = "App.data";
-
         public IntPtr myHWND;
-        public const int GWL_STYLE = -16;
-
+        const int GWL_STYLE = -16;
         const int ENUM_CURRENT_SETTINGS = -1;
 
 
@@ -55,23 +53,17 @@ namespace WPF_TEST
 
         private void CommandBinding_Executed_Maximize(object sender, ExecutedRoutedEventArgs e)
         {
-            // MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
-
-            //Top = SystemParameters.WorkArea.Height - Height;
-            //Left = SystemParameters.WorkArea.Width - Width;
-
             MaxHeight = SystemParameters.VirtualScreenHeight;
-
-
             WindowState = WindowState.Maximized;
         }
-        
 
         private void CommandBinding_Executed_Restore(object sender, ExecutedRoutedEventArgs e) => SystemCommands.RestoreWindow((Window)this);
 
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            #region 모니터 정보
+
             myHWND = new WindowInteropHelper(this).Handle;
             IntPtr myStyle = new IntPtr(WS.WS_CAPTION | WS.WS_CLIPCHILDREN | WS.WS_MINIMIZEBOX | WS.WS_MAXIMIZEBOX | WS.WS_SYSMENU | WS.WS_SIZEBOX);
             SetWindowLongPtr(new HandleRef(null, myHWND), GWL_STYLE, myStyle);
@@ -94,6 +86,8 @@ namespace WPF_TEST
                 // VisualTreeHelper.GetDpi(this);
                 Debug.WriteLine("");
             }
+
+            #endregion
         }
     }
 }

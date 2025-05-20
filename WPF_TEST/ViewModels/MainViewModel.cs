@@ -48,14 +48,10 @@ namespace WPF_TEST.ViewModels
         [RelayCommand]
         private void OnClick()
         {
-            if (Name == "Clicked")
-            {
-                Name = "just Click";
-            }
-            else
-            {
-                Name = "Clicked";
-            }
+            Views.BlurWindow blurWindow = new Views.BlurWindow();
+
+            blurWindow.Owner = App.Current.MainWindow;
+            blurWindow.Show();
         }
 
         [RelayCommand]
