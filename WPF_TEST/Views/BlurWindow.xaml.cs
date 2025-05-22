@@ -1,20 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Effects;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using WPF_TEST.Helpers;
 using static WPF_TEST.NativeMethods;
 
 namespace WPF_TEST.Views
@@ -34,7 +22,7 @@ namespace WPF_TEST.Views
 
         private void BlurWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            EnableBlur();
+            EnableBlur();            
         }
 
         internal void EnableBlur()
@@ -60,6 +48,10 @@ namespace WPF_TEST.Views
             SetWindowCompositionAttribute(windowHelper.Handle, ref data);
 
             Marshal.FreeHGlobal(accentPtr);
+
+            IntPtr hWnd = new WindowInteropHelper(GetWindow(this)).EnsureHandle();            
+            var preference = DWM_WINDOW_CORNER_PREFERENCE.DWMWCP_ROUND;
+            DwmSetWindowAttribute(hWnd, DWMWINDOWATTRIBUTE.DWMWA_WINDOW_CORNER_PREFERENCE, ref preference, sizeof(uint));
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

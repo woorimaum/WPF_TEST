@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+using System.Security;
 using System.Windows;
 
 namespace WPF_TEST
@@ -233,7 +235,7 @@ namespace WPF_TEST
                 return new RECT(x, y, x + width, y + height);
             }
 
-            public Size Size => new Size(right - left, bottom - top);
+            public System.Windows.Size Size => new System.Windows.Size(right - left, bottom - top);
         }
 
         // use this in cases where the Native API takes a POINT not a POINT*
@@ -375,6 +377,59 @@ namespace WPF_TEST
 
         [DllImport("user32.dll")]
         internal static extern int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
+
+        #endregion
+
+        #region GlassWindow
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct DWM_BLURBEHIND
+        {
+            public DwmBlurBehindDwFlags dwFlags;
+            public bool fEnable;
+            public IntPtr hRgnBlur;
+            public bool fTransitionOnMaximized;
+        }
+
+        [Flags]
+        public enum DwmBlurBehindDwFlags
+        {
+            DWM_BB_ENABLE = 1,
+            DWM_BB_BLURREGION = 2,
+            DWM_BB_TRANSITIONONMAXIMIZED = 4
+        }
+
+        [DllImport("dwmapi.dll", PreserveSig = false)]
+        public static extern bool DwmIsCompositionEnabled();
+
+        [DllImport("dwmapi.dll", PreserveSig = false)]
+        public static extern void DwmEnableBlurBehindWindow(IntPtr hwnd, ref DWM_BLURBEHIND blurBehind);
+
+        #endregion
+
+        #region Windows 11 CornerRadius
+
+        // The enum flag for DwmSetWindowAttribute's second parameter, which tells the function what attribute to set.
+        // Copied from dwmapi.h
+        public enum DWMWINDOWATTRIBUTE
+        {
+            DWMWA_WINDOW_CORNER_PREFERENCE = 33
+        }
+
+        // The DWM_WINDOW_CORNER_PREFERENCE enum for DwmSetWindowAttribute's third parameter, which tells the function
+        // what value of the enum to set.
+        // Copied from dwmapi.h
+        public enum DWM_WINDOW_CORNER_PREFERENCE
+        {
+            DWMWCP_DEFAULT = 0, // 창 모서리를 둥글게 처리할지 여부를 시스템에서 결정하도록 합니다. ??
+            DWMWCP_DONOTROUND = 1, 
+            DWMWCP_ROUND = 2, 
+            DWMWCP_ROUNDSMALL = 3 // 창 모서리를 작게 둥글게 처리하도록 합니다.
+        }
+
+        // Import dwmapi.dll and define DwmSetWindowAttribute in C# corresponding to the native function.
+        [DllImport("dwmapi.dll", CharSet = CharSet.Unicode, PreserveSig = false)]
+        internal static extern void DwmSetWindowAttribute(IntPtr hwnd, DWMWINDOWATTRIBUTE attribute, ref DWM_WINDOW_CORNER_PREFERENCE pvAttribute, uint cbAttribute);
 
         #endregion
     }

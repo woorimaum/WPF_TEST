@@ -131,7 +131,7 @@ namespace WPF_TEST.Helpers
                 {
                     var closure = new MonitorEnumCallback();
                     var proc = new NativeMethods.MonitorEnumProc(closure.Callback);
-                    NativeMethods.EnumDisplayMonitors(NativeMethods.NullHandleRef, null, proc, IntPtr.Zero);
+                    NativeMethods.EnumDisplayMonitors(NativeMethods.NullHandleRef, rcClip: null, lpfnEnum: proc, dwData: IntPtr.Zero);
                     if (closure.Screens.Count > 0)
                     {
                         return closure.Screens.Cast<ScreenHelper>();

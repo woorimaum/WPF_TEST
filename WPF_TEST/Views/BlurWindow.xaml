@@ -11,14 +11,37 @@
         FontFamily="Segoe UI"        
         mc:Ignorable="d"
         Title="BlurWindow" Height="450" Width="800" MouseLeftButtonDown="Window_MouseLeftButtonDown">
-    <Border CornerRadius="8">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0"
+                      GlassFrameThickness="0"
+                      CornerRadius="50"/>
+    </WindowChrome.WindowChrome>
+    
+    <Border>
         <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="1.5*" />
+            </Grid.ColumnDefinitions>
 
             <TextBlock Text="Blur Window"
                        HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
+                       Foreground="White"
                        FontSize="24"
-                       Foreground="White" />
+                       VerticalAlignment="Center" />
+
+            <Border Grid.Column="1"
+                    Background="White">
+                <TextBlock Text="Normal Window"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="24"
+                           Foreground="Black" />
+
+            </Border>
+            
         </Grid>
     </Border>
 </Window>

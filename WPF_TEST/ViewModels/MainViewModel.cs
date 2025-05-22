@@ -55,6 +55,14 @@ namespace WPF_TEST.ViewModels
         }
 
         [RelayCommand]
+        private void OnClick2()
+        {
+            Views.GlassWindow glassWindow = new Views.GlassWindow();
+            glassWindow.Owner = App.Current.MainWindow;
+            glassWindow.Show();
+        }
+
+        [RelayCommand]
         private void Maximize()
         {
             //SystemCommands.MaximizeWindow((Window)this);
