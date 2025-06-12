@@ -4,13 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_TEST.Views"
+        xmlns:controls="clr-namespace:WPF_TEST.Controls"
         mc:Ignorable="d"
         Background="#01000000"
         AllowsTransparency="True"
         SnapsToDevicePixels="True"
         WindowStyle="None"
         FontFamily="Segoe UI"        
-        Title="ColorWindow" Height="450" Width="800">
-    <Grid>  
+        Title="ColorWindow" Height="450" Width="800" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <Grid>
+        <controls:BorderListControl Margin="10" ItemsSource="{Binding ColorBorderList}"/>
     </Grid>
 </Window>

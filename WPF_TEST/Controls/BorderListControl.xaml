@@ -1,0 +1,40 @@
+<UserControl x:Class="WPF_TEST.Controls.BorderListControl"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:local="clr-namespace:WPF_TEST.Controls"
+			 mc:Ignorable="d" 
+			 d:DesignHeight="450" d:DesignWidth="800">
+	<UserControl.Resources>
+		<Style x:Key="BorderItemStyle" TargetType="Border">
+			<Setter Property="Margin" Value="5"/>
+			<Setter Property="Padding" Value="10"/>            
+			<Setter Property="CornerRadius" Value="8"/>
+			<Setter Property="Background" Value="White"/>
+			<Setter Property="Width" Value="200"/>
+			<Setter Property="Height" Value="70"/>
+		</Style>
+	</UserControl.Resources>
+	
+	<ScrollViewer VerticalScrollBarVisibility="Auto">
+		<ItemsControl x:Name="BorderItemsControl">
+			<ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<WrapPanel/>
+				</ItemsPanelTemplate>
+			</ItemsControl.ItemsPanel>
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<Border Style="{StaticResource BorderItemStyle}" Background="{Binding ColorValue}">
+						<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+							<TextBlock Text="{Binding ColorName}" Foreground="White" HorizontalAlignment="Center"/>
+							<TextBlock Text="{Binding ColorValue}" Foreground="White"/>							
+						</StackPanel>
+						<!--<ContentPresenter Content="{Binding}"/>-->
+					</Border>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
+	</ScrollViewer>
+</UserControl> 

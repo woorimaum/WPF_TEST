@@ -35,6 +35,9 @@ namespace WPF_TEST.ViewModels
         [ObservableProperty]
         private int selectedDataGridIndex;
 
+        [ObservableProperty]
+        private ObservableCollection<ColorBorder> colorBorderList;
+
         #endregion
 
         #region Commands
@@ -60,6 +63,15 @@ namespace WPF_TEST.ViewModels
             Views.GlassWindow glassWindow = new Views.GlassWindow();
             glassWindow.Owner = App.Current.MainWindow;
             glassWindow.Show();
+        }
+
+        [RelayCommand]
+        private void OnClick3()
+        {
+            Views.ColorWindow colorWindow = new Views.ColorWindow();
+            colorWindow.Owner = App.Current.MainWindow;
+            colorWindow.DataContext = this;
+            colorWindow.Show();
         }
 
         [RelayCommand]
@@ -112,6 +124,20 @@ namespace WPF_TEST.ViewModels
 
             SelectedDataGridCollection = DataGridCollection.First();
             SelectedDataGridIndex = 0;
+
+            // 샘플 데이터 추가
+            ColorBorderList = new ObservableCollection<ColorBorder>
+            {
+                new ColorBorder { ColorName = "춘유록색", ColorValue = "#DCEAA2" },
+                new ColorBorder { ColorName = "취람색", ColorValue = "#68C7C1" },
+                new ColorBorder { ColorName = "벽자색", ColorValue = "#8C9ED9" },
+                new ColorBorder { ColorName = "설백색", ColorValue = "#E2E8E4" },
+                new ColorBorder { ColorName = "행황색", ColorValue = "#F1A862" },
+                new ColorBorder { ColorName = "청현색", ColorValue = "#566A8E" },
+                new ColorBorder { ColorName = "장단색", ColorValue = "#E16350" },
+                new ColorBorder { ColorName = "추향색", ColorValue = "#C19287" },
+                new ColorBorder { ColorName = "백청색", ColorValue = "#4F90CC" },
+            };
         }
 
         partial void OnNameChanged(string value)
