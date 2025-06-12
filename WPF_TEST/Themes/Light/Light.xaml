@@ -11,8 +11,6 @@
                       Color="#FF34D0B3" />
     </LinearGradientBrush>
 
-    <Color x:Key="DefaultMainWinTitleButtonColor">#FFB0DCF1</Color>
-
     <SolidColorBrush x:Key="DefaultMainWinTitleButton" Color="{DynamicResource DefaultMainWinTitleButtonColor}" />
 
 </ResourceDictionary>

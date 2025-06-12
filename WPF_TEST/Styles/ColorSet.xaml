@@ -2,4 +2,5 @@
     <Color x:Key="BorderLightColor">#FFCCCCCC</Color>
     <Color x:Key="BorderMediumColor">#FF888888</Color>
     <Color x:Key="BorderDarkColor">#FF444444</Color>
+    <Color x:Key="AABorderDarkColor">Red</Color>
 </ResourceDictionary>

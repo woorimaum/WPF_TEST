@@ -16,8 +16,16 @@ namespace WPF_TEST.Views
         {
             InitializeComponent();
             // DataContext = new BlurHelper(this, AccentState.ACCENT_ENABLE_BLURBEHIND) { BlurOpacity = 100 };
-
+            KeyDown += BlurWindow_KeyDown;
             Loaded += BlurWindow_Loaded;
+        }
+
+        private void BlurWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                Close();
+            }
         }
 
         private void BlurWindow_Loaded(object sender, RoutedEventArgs e)
