@@ -32,6 +32,9 @@
 							<TextBlock Text="{Binding ColorValue}" Foreground="White"/>							
 						</StackPanel>
 						<!--<ContentPresenter Content="{Binding}"/>-->
+						<Border.Effect>
+                            <DropShadowEffect ShadowDepth="0" BlurRadius="10"/>
+                        </Border.Effect>
 					</Border>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>

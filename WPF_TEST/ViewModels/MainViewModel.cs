@@ -38,11 +38,18 @@ namespace WPF_TEST.ViewModels
         [ObservableProperty]
         private ObservableCollection<ColorBorder> colorBorderList;
 
+        [ObservableProperty]
+        private bool _isSelectorVisible;
+
+
+        public string ToggleButtonText => IsSelectorVisible ? "레이아웃 닫기" : "레이아웃 열기";
+
+        public int SelectedRows { get; set; } = 2;
+        public int SelectedColumns { get; set; } = 2;
+
         #endregion
 
         #region Commands
-
-
 
         #endregion
 
@@ -103,6 +110,12 @@ namespace WPF_TEST.ViewModels
                 SelectedDataGridCollection = DataGridCollection[DataGridCollection.IndexOf(SelectedDataGridCollection) + 1];
             }
             
+        }
+
+        [RelayCommand]
+        private void OnToggleSelector()
+        {
+            IsSelectorVisible = !IsSelectorVisible;
         }
 
         public MainViewModel()

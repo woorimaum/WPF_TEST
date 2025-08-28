@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
@@ -16,8 +17,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Shell;
+using WPF_TEST.ViewModels;
 using static WPF_TEST.NativeMethods;
-using System.Diagnostics;
 
 namespace WPF_TEST.Views
 {
@@ -30,9 +31,11 @@ namespace WPF_TEST.Views
         {
             InitializeComponent();
 
+            DataContext = App.Current.Services.GetService(typeof(MainViewModel));
+
             this.SourceInitialized += MainWindow_SourceInitialized;
             this.KeyDown += MainWindow_KeyDown;
-            this.MouseLeftButtonDown += Grid_MouseLeftButtonDown;
+            this.MouseLeftButtonDown += Grid_MouseLeftButtonDown;            
         }
 
         void MainWindow_KeyDown(object sender, KeyEventArgs e)

@@ -117,11 +117,14 @@
                                 Height="50"
                                 Margin="10"
                                 Command="{Binding ClickCommand}"                                
-                                Content="Click" />
+                                Style="{DynamicResource BookCallButtonStyle}"
+                                Content="Click" >
+                        </Button>
                         <Button Width="100"
                                 Height="50"
                                 Margin="10"
                                 Command="{Binding Click2Command}"
+                                Style="{DynamicResource LiquidGlassButtonV2}"
                                 Content="Click2" />
                         <Button Width="100"
                                 Height="50"

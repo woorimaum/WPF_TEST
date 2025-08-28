@@ -27,6 +27,15 @@ namespace WPF_TEST.Views
 
             InitializeComponent();
             Loaded += ColorWindow_Loaded;
+            KeyDown += ColorWindow_KeyDown;
+        }
+
+        private void ColorWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                Close();
+            }
         }
 
         private void ColorWindow_Loaded(object sender, RoutedEventArgs e)

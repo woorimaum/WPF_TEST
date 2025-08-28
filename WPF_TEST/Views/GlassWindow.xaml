@@ -3,15 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:WPF_TEST.Controls"
         xmlns:local="clr-namespace:WPF_TEST.Views"
         mc:Ignorable="d"
         Title="GlassWindow"
-        Height="500"
-        Width="500"
+        Height="1000"
+        Width="1000"
         Background="#01FFFFFF"
         AllowsTransparency="True"
         WindowStyle="None"
         ResizeMode="CanResize">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </Window.Resources>
     <!--<Window.Clip>
         <PathGeometry>
             <PathFigure StartPoint="250,0">
@@ -27,9 +32,26 @@
         </PathGeometry>
     </Window.Clip>-->
     <Grid>
-        <Ellipse Width="500"                 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel>            
+            <controls:MultiViewportSelector x:Name="vierportSelector" Margin="10" Height="Auto" Width="Auto"/>
+        </StackPanel>
+
+        <Ellipse Width="500"
                  Height="500"
+                 Grid.Row="1"
                  Stroke="#C000"
                  StrokeThickness="1" />
+
+        
     </Grid>
 </Window>
