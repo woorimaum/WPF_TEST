@@ -18,7 +18,7 @@
 	</UserControl.Resources>
 	
 	<ScrollViewer VerticalScrollBarVisibility="Auto">
-		<ItemsControl x:Name="BorderItemsControl">
+        <ItemsControl x:Name="BorderItemsControl" VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling">
 			<ItemsControl.ItemsPanel>
 				<ItemsPanelTemplate>
 					<WrapPanel/>

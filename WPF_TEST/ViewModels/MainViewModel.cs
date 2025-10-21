@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using WPF_TEST.Helpers;
 using WPF_TEST.Models;
 
 namespace WPF_TEST.ViewModels
@@ -57,7 +58,7 @@ namespace WPF_TEST.ViewModels
 
         [RelayCommand]
         private void OnClick()
-        {
+        {   
             Views.BlurWindow blurWindow = new Views.BlurWindow();
 
             blurWindow.Owner = App.Current.MainWindow;
@@ -120,8 +121,6 @@ namespace WPF_TEST.ViewModels
 
         public MainViewModel()
         {
-            name = "초기화";            
-
             DataGridCollection =
             [
                 new MyDataGrid() { Index = 0, Name = "aaaa", Description = "just" },
@@ -149,7 +148,7 @@ namespace WPF_TEST.ViewModels
                 new ColorBorder { ColorName = "청현색", ColorValue = "#566A8E" },
                 new ColorBorder { ColorName = "장단색", ColorValue = "#E16350" },
                 new ColorBorder { ColorName = "추향색", ColorValue = "#C19287" },
-                new ColorBorder { ColorName = "백청색", ColorValue = "#4F90CC" },
+                new ColorBorder { ColorName = "백청색", ColorValue = "#4F90CC" }
             };
         }
 

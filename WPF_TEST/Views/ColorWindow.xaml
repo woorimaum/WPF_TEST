@@ -13,6 +13,15 @@
         FontFamily="Segoe UI"        
         Title="ColorWindow" Height="450" Width="800" MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
         <controls:BorderListControl Margin="10" ItemsSource="{Binding ColorBorderList}"/>
+
+        <Border Grid.Row="1" Background="{DynamicResource LightTitleBackground}" CornerRadius="8">
+            <!--<TextBlock Text="Color List" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="16" FontWeight="SemiBold"/>-->
+        </Border>
     </Grid>
 </Window>

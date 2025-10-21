@@ -8,8 +8,7 @@
         xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         AllowsTransparency="True"
-        Title="MainWindow"
-        Foreground="White"
+        Title="MainWindow"        
         FontFamily="Segoe UI"
         Width="800"
         WindowStartupLocation="CenterScreen"
@@ -49,7 +48,6 @@
 
             <Border CornerRadius="8,8,0,0" Background="{DynamicResource LightTitleBackground}"
                     MouseLeftButtonDown="Border_MouseLeftButtonDown">
-                
 
                 <StackPanel HorizontalAlignment="Right"                            
                             VerticalAlignment="Center"
@@ -58,36 +56,47 @@
                             Style="{DynamicResource TitleBarButtonStyle}"
                             Width="50"
                             Height="50"
-                            ToolTip="Minimize"
                             Content="&#xe921;"
                             FontFamily="Segoe Fluent Icons"
-                            WindowChrome.IsHitTestVisibleInChrome="true" />
+                            WindowChrome.IsHitTestVisibleInChrome="true">
+                        <Button.ToolTip>
+                            <ToolTip Content="Minimize" FontFamily="Segoe UI"/>
+                        </Button.ToolTip>
+                    </Button>
                     <Button x:Name="RestoreButton"
                             Command="{x:Static SystemCommands.RestoreWindowCommand}"
                             Style="{DynamicResource TitleBarButtonStyle}"
                             Width="50"
                             Height="50"
-                            ToolTip="Restore"
                             Visibility="Visible"
                             Content="&#xe923;"
                             FontFamily="Segoe Fluent Icons"
-                            WindowChrome.IsHitTestVisibleInChrome="true" />
+                            WindowChrome.IsHitTestVisibleInChrome="true">
+                        <Button.ToolTip>
+                            <ToolTip Content="Restore" FontFamily="Segoe UI"/>
+                        </Button.ToolTip>
+                    </Button>
                     <Button x:Name="MaximizeButton"
                             Command="{x:Static SystemCommands.MaximizeWindowCommand}"
                             Width="50"
                             Height="50"
-                            ToolTip="Maximize"
                             Style="{DynamicResource TitleBarButtonStyle}"
                             Content="&#xe922;"
                             FontFamily="Segoe Fluent Icons"
                             Visibility="Visible"
-                            WindowChrome.IsHitTestVisibleInChrome="true" />
+                            WindowChrome.IsHitTestVisibleInChrome="true">
+                        <Button.ToolTip>
+                            <ToolTip Content="Maximize" FontFamily="Segoe UI"/>
+                        </Button.ToolTip>
+                    </Button>
                     <Button Width="50"
                             Height="50"
                             Style="{DynamicResource TitleBarCloseButtonStyle}"
                             Content="&#xe8bb;"
-                            FontFamily="Segoe Fluent Icons"
-                            ToolTip="Close">
+                            FontFamily="Segoe Fluent Icons">
+                        <Button.ToolTip>
+                            <ToolTip Content="Close" FontFamily="Segoe UI"/>
+                        </Button.ToolTip>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">
                                 <i:CallMethodAction TargetObject="{Binding ElementName=window}"
@@ -109,22 +118,17 @@
                         <RowDefinition Height="70" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <WrapPanel>
-                        <TextBlock Margin="10"
-                                   HorizontalAlignment="Center"
-                                   Text="{Binding Name}" />
+                    <WrapPanel>                        
                         <Button Width="100"
                                 Height="50"
                                 Margin="10"
-                                Command="{Binding ClickCommand}"                                
-                                Style="{DynamicResource BookCallButtonStyle}"
+                                Command="{Binding ClickCommand}"                                                                
                                 Content="Click" >
                         </Button>
                         <Button Width="100"
                                 Height="50"
                                 Margin="10"
-                                Command="{Binding Click2Command}"
-                                Style="{DynamicResource LiquidGlassButtonV2}"
+                                Command="{Binding Click2Command}"                                
                                 Content="Click2" />
                         <Button Width="100"
                                 Height="50"
