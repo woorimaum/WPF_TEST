@@ -11,12 +11,14 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using WPF_TEST.Helpers;
 using WPF_TEST.Models;
+using WPF_TEST.Services;
 
 namespace WPF_TEST.ViewModels
 {
     public partial class MainViewModel : ObservableObject
     {
         #region Properties
+        private readonly IDialogService _dialogService;
 
         [ObservableProperty]
         private string name;
@@ -57,11 +59,12 @@ namespace WPF_TEST.ViewModels
         #region Methods
 
         [RelayCommand]
-        private void OnClick()
-        {   
+        private async Task OnClick()
+        {
+            await _dialogService.ShowMessageDialogAsync("테스트", "메시지 박스 테스트");            
             Views.BlurWindow blurWindow = new Views.BlurWindow();
 
-            blurWindow.Owner = App.Current.MainWindow;
+            // blurWindow.Owner = App.Current.MainWindow;
             blurWindow.Show();
         }
 
@@ -119,8 +122,10 @@ namespace WPF_TEST.ViewModels
             IsSelectorVisible = !IsSelectorVisible;
         }
 
-        public MainViewModel()
+        public MainViewModel(IDialogService dialogService)
         {
+            _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
+
             DataGridCollection =
             [
                 new MyDataGrid() { Index = 0, Name = "aaaa", Description = "just" },
