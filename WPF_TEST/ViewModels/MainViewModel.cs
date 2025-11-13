@@ -1,5 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Toolkit.Uwp.Notifications;
+using Windows.Data.Xml.Dom;
+using Windows.UI.Notifications;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +11,10 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
+using Microsoft.Win32;
+using System.Diagnostics;
 using WPF_TEST.Helpers;
 using WPF_TEST.Models;
 using WPF_TEST.Services;
@@ -18,6 +24,7 @@ namespace WPF_TEST.ViewModels
     public partial class MainViewModel : ObservableObject
     {
         #region Properties
+
         private readonly IDialogService _dialogService;
 
         [ObservableProperty]
@@ -69,7 +76,7 @@ namespace WPF_TEST.ViewModels
         }
 
         [RelayCommand]
-        private void OnClick2()
+        private async Task OnClick2()
         {
             Views.GlassWindow glassWindow = new Views.GlassWindow();
             glassWindow.Owner = App.Current.MainWindow;

@@ -1,21 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Shell;
 using WPF_TEST.ViewModels;
 using static WPF_TEST.NativeMethods;
@@ -74,33 +63,36 @@ namespace WPF_TEST.Views
                 var scaleY = dpi.DpiScaleY;
 
                 // 원형 리전 생성 - DPI 스케일 적용
-                using (var path = new GraphicsPath())
+                int x = 0;
+                int y = 0;
+                int width = (int)Math.Round(500 * scaleX);
+                int height = (int)Math.Round(500 * scaleY);
+
+                IntPtr hRgn = IntPtr.Zero;
+
+                try
                 {
-                    // DPI 스케일을 고려한 위치와 크기 계산
-                    float x = 0;
-                    float y = 0;
-                    float width = (float)(500 * scaleX);
-                    float height = (float)(500 * scaleY);
-
-                    path.AddEllipse(x, y, width, height);
-
-                    using (var region = new Region(path))
-                    using (var graphics = Graphics.FromHwnd(hwnd))
+                    hRgn = CreateEllipticRgn(x, y, x + width, y + height);
+                    if (hRgn == IntPtr.Zero)
                     {
-                        var hRgn = region.GetHrgn(graphics);
+                        throw new InvalidOperationException("CreateEllipticRgn failed.");
+                    }
 
-                        var blurBehind = new DWM_BLURBEHIND
-                        {
-                            dwFlags = DwmBlurBehindDwFlags.DWM_BB_ENABLE | DwmBlurBehindDwFlags.DWM_BB_BLURREGION | DwmBlurBehindDwFlags.DWM_BB_TRANSITIONONMAXIMIZED,
-                            fEnable = true,
-                            hRgnBlur = hRgn,
-                            fTransitionOnMaximized = true
-                        };
+                    var blurBehind = new DWM_BLURBEHIND
+                    {
+                        dwFlags = DwmBlurBehindDwFlags.DWM_BB_ENABLE | DwmBlurBehindDwFlags.DWM_BB_BLURREGION | DwmBlurBehindDwFlags.DWM_BB_TRANSITIONONMAXIMIZED,
+                        fEnable = true,
+                        hRgnBlur = hRgn,
+                        fTransitionOnMaximized = true
+                    };
 
-                        DwmEnableBlurBehindWindow(hwnd, ref blurBehind);
-
-                        // 리전 핸들 해제
-                        region.ReleaseHrgn(hRgn);
+                    DwmEnableBlurBehindWindow(hwnd, ref blurBehind);
+                }
+                finally
+                {
+                    if (hRgn != IntPtr.Zero)
+                    {
+                        DeleteObject(hRgn);
                     }
                 }
             }
